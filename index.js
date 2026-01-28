@@ -2,11 +2,12 @@ const express = require('express');
 const cors = require('cors');
 
 const movieRouter = require('./routes/movie');
-
+const tvShowRouter = require('./routes/tvshow');
 const app = express();
 
 app.use(cors());
 app.use(movieRouter);
+app.use(tvShowRouter);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
