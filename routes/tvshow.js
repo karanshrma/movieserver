@@ -6,18 +6,18 @@ tvShowRouter.get("/api/tv/embed", async  (req, res) => {
         const {mediaId , seasonId , episodeId  , provider } = req.query;
 
 
-        if (!mediaId || !provider) {
+        if (!mediaId || !seasonId || !episodeId || !provider) {
             return res.status(400).json({
                 success: false,
-                message: 'mediaId & provider required',
+                message: 'mediaId, seasonId, episodeId, provider are required',
             });
         }
 
         const url = await getTvEmbedUrl(
             mediaId,
-            provider,
-            episodeId,
             seasonId,
+            episodeId,
+            provider,
             "73d9b0d45a4e8147ef38e6e3b2aca99b",
         );
 
@@ -42,8 +42,6 @@ async function getTvEmbedUrl(mediaId, seasonId, episodeId, provider, apiKey) {
     const iconColor = '#ffffff';
 
     switch (provider) {
-        case 'vidsrc':
-            return `https://vidsrc.cc/v2/embed/tv/${mediaId}/${seasonId}/${episodeId}?autoPlay=true&autoNext=true`;
         case 'vidsrc':
             return `https://vidsrc.cc/v2/embed/tv/${mediaId}/${seasonId}/${episodeId}?autoPlay=true&autoNext=true`;
         case 'vidsrcpro':
